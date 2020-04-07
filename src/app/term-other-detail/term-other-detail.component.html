@@ -1,0 +1,44 @@
+<h3>Non-English term Detail - {{ termOther.wordNonEnglish}}</h3>
+<p>&nbsp;</p>
+
+<div class="row" *ngIf="termOther">
+  <div class="col-md-6 col-sm-6">
+    <dl class="dl-horizontal">
+      <dt>
+      Definitions <p>({{ termOther.definitions.length }})</p>
+      <p><a [routerLink]="['/term/other/edit', termOther._id]" class="btn btn-default" id="add">Add another</a></p></dt>
+      <dd *ngFor = 'let d of termOther.definitions'> <p>
+          <button class="btn btn-primary" (click)='incrementLike(d)' id="add">Like {{d.likes}}</button>
+           &nbsp; Author: {{ termOther.authorName}} on {{d.dateCreated }} </p>
+           {{d.definition}} <hr> </dd>
+      
+      <p><dt>Field of study</dt>
+      <dd>{{ termOther.fieldOfStudy }}</dd></p>
+      <p><dt>Author name</dt>
+      <dd>{{ termOther.authorName }}</dd></p>
+      <p><dt>Dates</dt>
+      <dd> Created {{ termOther.dateCreated }}</dd>
+      <dd>Revised {{ termOther.dateRevised }}</dd></p>
+      <p><dt>Links</dt>
+      <dd>
+        <a href= {{termOther.linkAuthoritative}} class="btn btn-default">Authoritative</a> &nbsp;
+        <a href= {{termOther.linkWikipedia}} class="btn btn-default">Wikipedia</a> &nbsp;
+        <a href= {{termOther.linkYouTube}} class="btn btn-default">YouTube</a> &nbsp;
+      </dd></p>
+      <p><dt>Was this helpful?</dt>
+      <dd>
+        <button class="btn btn-primary" (click)='incrementHelpyes()' id="add">Yes {{termOther.helpYes}}</button> &nbsp;
+        <button class="btn btn-primary" (click)='incrementHelpno()' id="add">No {{termOther.helpNo}}</button>
+      </dd></p>
+    </dl>
+  </div>  
+</div>
+<div *ngIf="termOther">
+  <hr>
+  <a routerLink="/term" class="btn btn-default">Back to list</a>
+</div>
+
+<div *ngIf="!termOther">
+  <p>Requested Term was not found</p>
+  <p><a routerLink="/term" class="btn btn-default">Back to list</a></p>
+</div>

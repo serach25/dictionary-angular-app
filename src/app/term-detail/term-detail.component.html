@@ -1,0 +1,55 @@
+<h3>English Term Detail - {{ termEnglish.wordEnglish}}</h3>
+<p>&nbsp;</p>
+
+<div class="row" *ngIf="termEnglish">
+  <div class="col-md-6 col-sm-6">
+    <dl class="dl-horizontal">
+      <dt>
+      Definitions <p>({{ termEnglish.definitions.length }})</p>
+      <p><a [routerLink]="['/term/english/edit', termEnglish._id]" class="btn btn-default" id="add">Add another</a></p></dt>
+      <dd *ngFor = 'let d of termEnglish.definitions'> <p>
+          <button class="btn btn-primary" (click)='incrementLike(d)' id="add">Like {{d.likes}}</button>
+           &nbsp; Author: {{ termEnglish.authorName}} on {{d.dateCreated }} </p>
+           {{d.definition}} <hr> </dd>
+      
+      <p><dt>Field of study</dt>
+      <dd>{{ termEnglish.fieldOfStudy }}</dd></p>
+      <p><dt>Author name</dt>
+      <dd>{{ termEnglish.authorName }}</dd></p>
+      <p><dt>Dates</dt>
+      <dd> Created {{ termEnglish.dateCreated }}</dd>
+      <dd>Revised {{ termEnglish.dateRevised }}</dd></p>
+      <p><dt>Translations</dt></p> &nbsp;
+      <dd>
+        <div *ngFor = 'let id of termsOther'>
+        <div *ngIf="id.termEnglishId == termEnglish._id ">
+        <p><a [routerLink]="['/term/other/detail',  id._id]" class="btn btn-default" id="add">
+          {{id.languageCode}}</a></p>
+          </div>
+          </div>
+          <p><a [routerLink]="['/term/other/create', termEnglish._id]" class="btn btn-default" id="add">Add Translation</a></p>
+      </dd>
+
+      <p><dt>Links</dt>
+      <dd>
+        <a href= {{termEnglish.linkAuthoritative}} class="btn btn-default">Authoritative</a> &nbsp;
+        <a href= {{termEnglish.linkWikipedia}} class="btn btn-default">Wikipedia</a> &nbsp;
+        <a href= {{termEnglish.linkYouTube}} class="btn btn-default">YouTube</a> &nbsp;
+      </dd></p>
+      <p><dt>Was this helpful?</dt>
+      <dd>
+        <button class="btn btn-primary" (click)='incrementHelpyes()' id="add">Yes {{termEnglish.helpYes}}</button> &nbsp;
+        <button class="btn btn-primary" (click)='incrementHelpno()' id="add">No {{termEnglish.helpNo}}</button>
+      </dd></p>
+    </dl>
+  </div>  
+</div>
+<div *ngIf="termEnglish">
+  <hr>
+  <a routerLink="/term" class="btn btn-default">Back to list</a>
+</div>
+
+<div *ngIf="!termEnglish">
+  <p>Requested Term was not found</p>
+  <p><a routerLink="/term" class="btn btn-default">Back to list</a></p>
+</div>

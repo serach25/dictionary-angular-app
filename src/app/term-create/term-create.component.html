@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-md-8">
+      <h3>Create a new English Term</h3>
+      <p>Enter data, and click/tap the Save button</p>
+      <form (ngSubmit)='termEnglishSave()' #f='ngForm'>
+  
+        <!--Author Name Input-->
+        <div class="form-group">
+          <label class="control-label" for="authorName">Author Name:</label>
+          <input class="form-control" id="authorName" name="authorName" [(ngModel)]="newTermEnglish.authorName" required minlength="3"
+            maxlength="100" #authorName="ngModel" autofocus>
+  
+          <!-- Multiple conditions... -->
+          <div *ngIf='authorName.invalid && (authorName.dirty || authorName.touched)' class='alert alert-danger'>
+            <div *ngIf='authorName.errors?.required'>Author Name is required, 3 to 100 characters</div>
+            <div *ngIf='authorName.errors?.minlength'>Author Name must be at least 3 characters</div>
+          </div>
+        </div>
+  
+        <!--wordEnglish Input-->
+        <div class="form-group">
+          <label class="control-label" for="wordEnglish">Term or Word in English:</label>
+          <input class="form-control" id="wordEnglish" name="wordEnglish" [(ngModel)]="newTermEnglish.wordEnglish" required minlength="3" maxlength="50"
+            #wordEnglish="ngModel">
+  
+          <!-- Validation error area -->
+          <div *ngIf='wordEnglish.invalid && (wordEnglish.dirty || wordEnglish.touched)' class='alert alert-danger'>
+            <div *ngIf='wordEnglish.errors?.required'>English Term is required, 3 to 50 characters</div>
+            <div *ngIf='wordEnglish.errors?.minlength'>English Term must be at least 3 characters</div>
+          </div>
+        </div>
+  
+        
+        <!--word Expanded Input-->
+        <div class="form-group">
+            <label class="control-label" for="wordExpanded">Expansion, if term or word(above) is an acronym or initialism:</label>
+            <input class="form-control" id="wordExpanded" name="wordExpanded" [(ngModel)]="newTermEnglish.wordExpanded" minlength="3" maxlength="50"
+              #wordExpanded="ngModel">
+    
+            <!-- Validation error area -->
+            <div *ngIf='wordExpanded.invalid && (wordExpanded.dirty || wordExpanded.touched)' class='alert alert-danger'>
+              <div *ngIf='wordExpanded.errors?.minlength'>Expanded Term must be at least 3 characters</div>
+            </div>
+          </div>
+
+
+          <!--Field of Study Input-->
+          <div class="form-group">
+            <label class="control-label" for="fieldOfStudy">Field of Study:</label>
+            <input class="form-control" id="fieldOfStudy" name="fieldOfStudy" placeholder="e.g. Computer Programming" [(ngModel)]="newTermEnglish.fieldOfStudy" required minlength="3" maxlength="50"
+              #fieldOfStudy="ngModel">
+    
+            <!-- Validation error area -->
+            <div *ngIf='fieldOfStudy.invalid && (fieldOfStudy.dirty || fieldOfStudy.touched)' class='alert alert-danger'>
+              <div *ngIf='fieldOfStudy.errors?.required'>Field of Study is required, 3 to 50 characters</div>
+              <div *ngIf='fieldOfStudy.errors?.minlength'>Field of Study must be at least 3 characters</div>
+            </div>
+          </div>
+
+
+          <!--Definition Input-->
+          <div class="form-group">
+            <label class="control-label" for="definition" >Definition:</label>
+            <textarea class="form-control" id="definition" name="definition" [(ngModel)]="newDefinition.definition" required minlength="3" maxlength="50"
+              #definitions="ngModel"></textarea>
+    
+            <!-- Validation error area-->
+            <div *ngIf='definitions.invalid && (definitions.dirty || definitions.touched)' class='alert alert-danger'>
+              <div *ngIf='definitions.errors?.required'>Definition is required, 3 to 50 characters</div>
+              <div *ngIf='definitions.errors?.minlength'>Definition must be at least 3 characters</div>
+            </div>
+          </div>
+
+          <!--Link Authoritative Input-->
+          <div class="form-group">
+            <label class="control-label" for="linkAuthoritative" >Link(URL), authoritative:</label>
+            <input class="form-control" id="linkAuthoritative" name="linkAuthoritative" [(ngModel)]="newTermEnglish.linkAuthoritative" minlength="3" maxlength="100"
+              #linkAuthoritative="ngModel">
+    
+            <!-- Validation error area -->
+            <div *ngIf='linkAuthoritative.invalid && (linkAuthoritative.dirty || linkAuthoritative.touched)' class='alert alert-danger'>
+              <div *ngIf='linkAuthoritative.errors?.minlength'>Authoritative Link must be at least 3 characters</div>
+            </div>
+          </div>
+
+
+          <!--Link Wikipedia Input-->
+          <div class="form-group">
+            <label class="control-label" for="linkWikipedia" >Link(URL), on Wikipedia:</label>
+            <input class="form-control" id="linkWikipedia" name="linkWikipedia" [(ngModel)]="newTermEnglish.linkWikipedia" minlength="3" maxlength="100"
+              #linkWikipedia="ngModel">
+    
+            <!-- Validation error area -->
+            <div *ngIf='linkWikipedia.invalid && (linkWikipedia.dirty || linkWikipedia.touched)' class='alert alert-danger'>
+              <div *ngIf='linkWikipedia.errors?.minlength'>Wikipedia Link must be at least 3 characters</div>
+            </div>
+          </div>
+
+          <!--Link YouTube Input-->
+          <div class="form-group">
+            <label class="control-label" for="linkYouTube" >Link(URL), on YouTube:</label>
+            <input class="form-control" id="linkYouTube" name="linkYouTube" [(ngModel)]="newTermEnglish.linkYouTube" minlength="3" maxlength="100"
+              #linkYouTube="ngModel">
+    
+            <!-- Validation error area -->
+            <div *ngIf='linkYouTube.invalid && (linkYouTube.dirty || linkYouTube.touched)' class='alert alert-danger'>
+              <div *ngIf='linkYouTube.errors?.minlength'>YouTube Link must be at least 3 characters</div>
+            </div>
+          </div>
+
+          
+        <button class="btn btn-primary" type="submit" id="submit" [disabled]="!f.form.valid">Save</button>&nbsp;
+        <a routerLink="/term" class="btn btn-default">Back to list</a>
+  
+      </form>
+    </div>
+ </div>

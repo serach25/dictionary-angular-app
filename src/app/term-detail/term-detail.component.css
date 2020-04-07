@@ -1,0 +1,9 @@
+hr { 
+    border-width: 2px;
+  } 
+
+  #add{
+    background-color: hotpink;
+    border: solid hotpink;
+    color: white;
+  }

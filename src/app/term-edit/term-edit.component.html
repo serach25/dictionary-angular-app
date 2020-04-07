@@ -1,0 +1,62 @@
+<h3>Add another definition to {{termEnglish.wordEnglish}}</h3>
+<p>Enter data, and click/tap the Save button</p>
+<p>&nbsp;</p>
+
+<div class="row" *ngIf="termEnglish">
+  <div class="col-md-8">
+    <form (ngSubmit)='termEnglishSave()' #f='ngForm'>
+
+      <div class="form-group">
+        <label class="control-label" for="authorName">Author Name:</label>
+        <input class="form-control" id="authorName" name="authorName" [(ngModel)]="newDefinition.authorName" required minlength="3"
+          maxlength="100" #authorName="ngModel" autofocus>
+
+        <div *ngIf='authorName.invalid && (authorName.dirty || authorName.touched)' class='alert alert-danger'>
+          <div *ngIf='authorName.errors?.required'>Author Name is required, 3 to 100 characters</div>
+          <div *ngIf='authorName.errors?.minlength'>Author Name must be at least 3 characters</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="definition">Definition:</label>
+        <textarea class="form-control" id="definition" name="definition" [(ngModel)]="newDefinition.definition" required minlength="3" maxlength="50"
+          #definition="ngModel"></textarea>
+      
+        <!-- Validation error area -->
+         <div *ngIf='definition.invalid && (definition.dirty || definition.touched)' class='alert alert-danger'>
+          <div *ngIf='definition.errors?.required'>Definition is required, 3 to 50 characters</div>
+          <div *ngIf='definition.errors?.minlength'>Definition must be at least 3 characters</div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" type="submit" [disabled]="!f.form.valid">Save</button>&nbsp;
+      <a routerLink="/term" class="btn btn-default">Cancel</a>
+
+    </form>
+    <p>&nbsp;</p>
+
+    <div class="col-md-6 col-sm-6">
+        <dl class="dl-horizontal">
+          <dt>
+          Existing Definitions <p>({{ termEnglish.definitions.length }})</p></dt>
+          <dd *ngFor = 'let d of termEnglish.definitions'> <p>
+              <a [routerLink]="['/term/english/likes', termEnglish._id]" class="btn btn-default">Like {{d.likes}}</a>
+               &nbsp; Author: {{ termEnglish.authorName}} on {{d.dateCreated }} </p>
+               {{d.definition}} <hr> </dd>
+          
+          <p><dt>Field of study</dt>
+          <dd>{{ termEnglish.fieldOfStudy }}</dd></p>
+        </dl>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="termEnglish">
+    <hr>
+    <a routerLink="/term" class="btn btn-default">Back to list</a>
+</div>
+
+<div *ngIf="!termEnglish">
+  <p>Requested term was not found</p>
+  <p><a routerLink="/term" class="btn btn-default">Back to list</a></p>
+</div>
